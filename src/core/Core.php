@@ -36,7 +36,16 @@ class Core
 
                 $controller = $prefixController . $currentController;
                 $newController = new $controller();
-                $newController->$action($matches);
+
+                try {
+                    $data = $newController->$action($matches);
+                    Response::responseSucess($data, 200);
+                } catch (\PDOException $ex) {
+                    Response::responseError($ex->errorInfo[2], 500);
+                } catch (\Exception $ex){
+                    Response::responseError($ex->getMessage(), $ex->getCode());
+                }
+                
             }
         }
         

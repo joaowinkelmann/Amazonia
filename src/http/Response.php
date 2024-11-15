@@ -11,8 +11,23 @@ class Response
         header("Content-type: application/json");
         http_response_code($statusCode);
 
-
         echo json_encode($body);
+    }
+
+    public static function responseSucess($data, int $responseCode)
+    {
+        self::responseMessage([
+            "error" => null,
+            "data" => $data
+        ], $responseCode);
+    }
+
+    public static function responseError(string $error, int $responseCode)
+    {
+        self::responseMessage([
+            "error" => $error,
+            "data" => null
+        ], $responseCode);
     }
 
     public static function generateToken($body)
