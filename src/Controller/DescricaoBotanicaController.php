@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\http\Request;
+
 class DescricaoBotanicaController extends BaseController
 {
     public function __construct()
     {
+        Request::authorization();
         $descricao_botanica_columns = [
             "id",
             "especie_id",

@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\http\Request;
+
 class ComposicaoBiotecnologicaController extends BaseController
 {
     public function __construct()
     {
+        Request::authorization();
         $composicao_biotecnologica_columns = [
             "id",
             "especie_id",

@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\http\Request;
+
 class AnexosController extends BaseController
 {
     public function __construct()
     {
+       Request::authorization();
         $anexos_columns = [
             "id",
             "especie_id",

@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\http\Request;
+
 class AspectosEcologicosController extends BaseController
 {
     public function __construct()
     {
+        Request::authorization();
         $aspectos_ecologicos_columns = [
             "id",
             "especie_id",

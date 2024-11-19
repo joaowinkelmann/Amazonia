@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\http\Request;
+
 class ProducaoMudasController extends BaseController
 {
     public function __construct()
     {
+        Request::authorization();
         $producao_mudas_columns = [
             "id",
             "especie_id",

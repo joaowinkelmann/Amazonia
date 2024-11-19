@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\http\Request;
+
 class SolosController extends BaseController
 {
     public function __construct()
     {
+        Request::authorization();
         $solos_columns = [
             "id",
             "especie_id",

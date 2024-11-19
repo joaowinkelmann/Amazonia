@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\DAO\UsuarioDAO;
+use App\http\Request;
+
 class UsuarioController extends BaseController
 {
     public function __construct()
@@ -20,10 +23,13 @@ class UsuarioController extends BaseController
             "senha"
         ];
 
-        parent::__construct('Taxonomia', $usuario_columns, $dados_obrigatorios);
+        parent::__construct('Usuario', $usuario_columns, $dados_obrigatorios);
     }
 
     public function login(){
-        return ["message" => "Falta fazer"];
+        $body = Request::requestBody();
+        
+        $usuarioDao = new UsuarioDAO();
+        return $usuarioDao->auth($body);
     }
 }

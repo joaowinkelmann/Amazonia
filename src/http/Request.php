@@ -20,7 +20,6 @@ class Request
 
     public static function authorization()
     {
-        try {
             $authorization = getallheaders();
             if (!isset($authorization["Authorization"])) throw new Exception("token não encontrado", 401);
 
@@ -28,10 +27,5 @@ class Request
 
             $decode = JWT::decode($authorizationPartials[1], new Key($_ENV['KEY'], 'HS256'));
             return $decode;
-        } catch (\Exception $e) {
-            if ($e->getMessage() === "Expired token") throw new Exception("Expired token", 401);
-
-            throw new Exception($e->getMessage(), 401);
-        }
     }
 }

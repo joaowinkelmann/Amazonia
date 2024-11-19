@@ -5,6 +5,7 @@ namespace App\core;
 use App\Controller\NaoEncontradoController;
 use App\http\Request;
 use App\http\Response;
+use Exception;
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
@@ -35,9 +36,9 @@ class Core
                 [$currentController, $action] = explode('@', $controller);
 
                 $controller = $prefixController . $currentController;
-                $newController = new $controller();
 
                 try {
+                    $newController = new $controller();
                     $data = $newController->$action($matches);
                     Response::responseSucess($data, 200);
                 } catch (\PDOException $ex) {

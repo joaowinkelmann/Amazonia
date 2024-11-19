@@ -2,6 +2,7 @@
 
 namespace App\Db;
 
+use App\http\Request;
 use App\http\Response;
 use Exception;
 
@@ -26,6 +27,9 @@ class DbCoon
     // Função para realizar SELECT em uma tabela retornando colunas específicas
     public static function selectAll($table, $columns = ['*'])
     {
+        if($table === "Usuario"){
+            $token = Request::authorization();
+        }
         $db = self::coon();
         $columnsStr = implode(", ", $columns);
 
@@ -39,6 +43,11 @@ class DbCoon
     // Função para realizar SELECT com base no ID
     public static function selectById($table, $id, $columns = ['*'])
     {
+        if($table === "Usuario"){
+            $token = Request::authorization();
+            $id = $token->id_usuario;
+        }
+
         $db = self::coon();
         $columnsStr = implode(", ", $columns);
 
@@ -54,6 +63,10 @@ class DbCoon
     // Função para realizar INSERT
     public static function insert($table, $data, $dados_obrigatorios = [])
     {
+        if($table === "Usuario"){
+            $data["senha"] = password_hash($data["senha"], PASSWORD_DEFAULT);
+        }
+
         if(sizeof($dados_obrigatorios) >= 1){
             foreach ($dados_obrigatorios as $key => $dado_obrigatorio) {
                 if(empty($data[$dado_obrigatorio])){
@@ -79,6 +92,11 @@ class DbCoon
     // Função para realizar DELETE
     public static function delete($table, $id)
     {
+        if($table === "Usuario"){
+            $token = Request::authorization();
+            $id = $token->id_usuario;
+        }
+
         $db = self::coon();
         $query = "DELETE FROM $table WHERE id = :id";
         $stmt = $db->prepare($query);
@@ -92,6 +110,11 @@ class DbCoon
     // Função para realizar UPDATE
     public static function update($table, $data, $id)
     {
+        if($table === "Usuario"){
+            $token = Request::authorization();
+            $id = $token->id_usuario;
+        }
+
         $db = self::coon();
         $setClause = implode(", ", array_map(fn($key) => "$key = :$key", array_keys($data)));
 

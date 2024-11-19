@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\http\Request;
+
 class CultivoViveirosController extends BaseController
 {
     public function __construct()
     {
+        Request::authorization();
         $cultivo_viveiros_columns = [
             "id",
             "especie_id",

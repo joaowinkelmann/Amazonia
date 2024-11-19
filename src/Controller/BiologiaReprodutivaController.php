@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\http\Request;
+
 class BiologiaReprodutivaController extends BaseController
 {
     public function __construct()
     {
+        Request::authorization();
 
         $biologia_reprodutiva_columns = [
             "id",

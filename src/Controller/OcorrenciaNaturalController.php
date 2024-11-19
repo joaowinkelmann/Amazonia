@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\http\Request;
+
 class OcorrenciaNaturalController extends BaseController
 {   
     public function __construct()
     {
+        Request::authorization();
         $ocorrencia_natural_columns = [
             "id",
             "especie_id",

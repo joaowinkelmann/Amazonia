@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\http\Request;
+
 class ProdutosUtilizacoesController extends BaseController
 {
     public function __construct()
     {
+        Request::authorization();
         $produtos_utilizacoes_columns = [
             "id",
             "especie_id",
