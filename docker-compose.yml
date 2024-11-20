@@ -3,9 +3,9 @@ services:
     image: php:8.2-apache
     container_name: amazonia-php
     ports:
-      - "8080:80"
+      - "8694:80"
     volumes:
-      - C:\Users\User\Desktop\Amazonia:/var/www/html
+      - /var/www/html/Amazonia:/var/www/html
     links:
       - db
     command: bash -c "docker-php-ext-install pdo pdo_mysql mysqli && a2enmod rewrite && apache2-foreground"
@@ -16,6 +16,11 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /var/lib/mysql
+      - mysql_data:/var/lib/mysql
+      - ./tabela.sql:/docker-entrypoint-initdb.d/tabela.sql
     environment:
       - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=amazonia
+
+volumes:
+  mysql_data:

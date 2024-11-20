@@ -1,6 +1,6 @@
-CREATE DATABASE amazonia
+-- CREATE DATABASE amazonia
 
-USE amazonia
+-- USE amazonia
 
 -- Tabela: Especie
 CREATE TABLE Especie (
